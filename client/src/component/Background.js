@@ -12,10 +12,15 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import {WORD} from './Word';
 import Moment from 'react-moment';
+import {useSelector, useDispatch} from 'react-redux'
+import allActions from '../actions'
 
 function Background(){
     const classes = useStyles(); 
-    const [startDate, setStartDate] = useState(new Date()); 
+
+    const selectDate = useSelector(state => state.currentBackground)
+    const dispatch = useDispatch()
+
     const words = WORD;
     const options = {
       rotations: 2,
@@ -36,7 +41,7 @@ function Background(){
                 <Container className={classes.flexdi} maxWidth="md">
                     <Container className={classes.top_content}>
                         <Typography component="h1" variant="h2" align='left' color="textPrimary" >
-                            NEWSDASHBOARD
+                            Just Ten Minute
                         </Typography>
                         <div className={classes.wc}>
                           <ReactWordcloud words={words} options={options} />
@@ -45,15 +50,14 @@ function Background(){
                     <Container className={classes.second_content}>
                       <div>
                         <DayPicker 
-                        selected={startDate}
-                        onChange={date => setStartDate(date)} />
+                          onDayClick={(day) => dispatch(allActions.backgroundActions.setDate(day))} />
                       </div>
                     </Container>
                 </Container>
                 <Container maxWidth="md">
                     <div className={classes.dateChild}>
                       <Typography>
-                        <Moment format="YYYY년 MM월 DD일" date={startDate} />
+                        <Moment format="YYYY년 MM월 DD일" date={selectDate.date} />
                       </Typography>  
                     </div>
                     <div>

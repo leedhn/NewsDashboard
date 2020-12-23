@@ -66,8 +66,8 @@ const App = () => {
               buttonName={'세계'}/>
             <CateButton classes={classes} dispatch={dispatch} setCategory={setCategory} category={category}
               buttonName={'IT과학'}/>
-              <CateButton classes={classes} dispatch={dispatch} setCategory={setCategory} category={category}
-                buttonName={'오피니언'}/>
+            <CateButton classes={classes} dispatch={dispatch} setCategory={setCategory} category={category}
+              buttonName={'오피니언'}/>
           </div>
         </main>
       </React.Fragment>
