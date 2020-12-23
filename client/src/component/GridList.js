@@ -1,23 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import {NAVER_COLOR} from '../models/colors';
 import CardFrame from './card/CardFrame';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const apiURL = "http://localhost:8000";
 
-function GridList() {
+const GridList = ({category}) => {
   const classes = useStyles();
+  const [currentCategory, setCategory] = useState('Hot');
+  const [datetime, setDatetime] = useState('20201202');
+  const [image_url, setImage_url] = useState(null);
+  const [title, setTitle] = useState(null);
 
+  const _getLiveData = ({datetime}) => {
+    let items = [];
+    fetch('${apiURL}/test/go/')
+  }
+
+  useEffect(() => {
+    setCategory(category);
+    let items = [];
+    await fetch("test/go")
+      .then(response => response.json())
+      .then((data) => {
+        data.forEach((doc) => {
+          items.push({
+            image_url : doc.image_url,
+            title : doc.title,
+            url : doc.url,
+            keyword : doc.keyword,
+            press : doc.press,
+            title_list
+          })
+        })
+        
+      })
+  })
   return (
     <React.Fragment>
         <CssBaseline/>
           <main>
+            <Typography>{currentCategory}</Typography>
             <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
               {cards.map((card) => (
